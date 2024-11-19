@@ -3,6 +3,9 @@ const bodyParser = require("body-parser");
 const sequelize = require("./src/infrastructure/config/db"); 
 const authRoutes = require("./src/presentation/routes/authRoutes");
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger-output.json'); // Archivo generado por swagger-autogen
+
 require("dotenv").config();
 
 const app = express();
@@ -11,6 +14,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // Rutas 
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use("/api/auth", authRoutes); 
 
 
