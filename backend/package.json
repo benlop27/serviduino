@@ -5,16 +5,22 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js",
+    "test": "jest",
+    "crear-roles-permisos": "node src/infrastructure/scripts/crearRolesPermisos.js",
+    "sync-db": "node src/infrastructure/scripts/sincronizarDb.js"
   },
   "author": "yesenia",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "inversify": "^6.1.4",
-    "mysql2": "^3.11.4",
+    "jsonwebtoken": "^9.0.2",
+    "mariadb": "^3.4.0",
+    "nodemon": "^3.1.7",
     "reflect-metadata": "^0.2.2",
     "sequelize": "^6.37.5"
   },

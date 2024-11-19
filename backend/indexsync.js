@@ -17,7 +17,7 @@ app.use("/api/auth", authRoutes);
 const PORT = process.env.PORT || 3000;
 
 sequelize
-  .sync({ force: true , alter: true })
+  .sync({ force: true })
   .then(() => {
     console.log("Base de datos sincronizada!");
     app.listen(PORT, () => console.log(`Servicio ejecutandose en el puerto ${PORT}`));

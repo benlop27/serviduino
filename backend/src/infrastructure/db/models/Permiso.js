@@ -1,16 +1,18 @@
+// src/infrastructure/db/models/Permiso.js
 const { DataTypes } = require("sequelize");
 const sequelize = require("../../config/db");
 
-const Name = sequelize.define("Name", {
+const Permiso = sequelize.define("Permiso", {
   id: {
     type: DataTypes.INTEGER,
-    autoIncrement: true,
     primaryKey: true,
+    autoIncrement: true,
   },
-  value: {
+  nombre: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,  // Cada permiso tiene un nombre único
   },
 });
 
-module.exports = Name;
+module.exports = Permiso;
