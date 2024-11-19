@@ -9,13 +9,13 @@ class AuthService {
   async iniciarSesion(usuario, contrasena) {
     const usuarioEncontrado = await Usuario.findOne({ where: { usuario }, include: Rol });
     if (!usuarioEncontrado || !bcrypt.compareSync(contrasena, usuarioEncontrado.contrasena)) {
-      throw new Error("Credenciale| inválidas");
+      throw new Error("Credenciales inválidas");
     }
 
     // Generar el token JWT
     const token = jwt.sign(
-      { id: usuarioEncontrado.id, rol: usuarioEncontrado.Rol.nombre },
-      process.env.JWT_SECRET,
+      { id: usuarioEncontrado.id, usuario: usuarioEncontrado.usuario, rol: usuarioEncontrado.Rol.nombre },
+      process.env.JWT_SECRETO,
       { expiresIn: "1h" }
     );
 

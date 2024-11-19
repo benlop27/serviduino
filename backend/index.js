@@ -11,15 +11,12 @@ const app = express();
 app.use(bodyParser.json());
 
 // Rutas 
-app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRoutes); 
+
+
+
 
 // Sincronizar base de datos y arrancar servidor
 const PORT = process.env.PORT || 3000;
 
-sequelize
-  .sync({ force: true , alter: true })
-  .then(() => {
-    console.log("Base de datos sincronizada!");
-    app.listen(PORT, () => console.log(`Servicio ejecutandose en el puerto ${PORT}`));
-  })
-  .catch((err) => console.error("Base de datos error:", err));
+  app.listen(PORT, () => console.log(`Servicio ejecutandose en el puerto ${PORT}`));

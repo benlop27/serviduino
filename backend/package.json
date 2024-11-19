@@ -8,7 +8,7 @@
     "dev": "nodemon index.js",
     "test": "jest",
     "crear-roles-permisos": "node src/infrastructure/scripts/crearRolesPermisos.js",
-    "sync-db": "node src/infrastructure/scripts/sincronizarDb.js"
+    "sync-db": "node indexsync.js"
   },
   "author": "yesenia",
   "license": "ISC",
