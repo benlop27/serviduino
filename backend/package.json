@@ -1,0 +1,25 @@
+{
+  "name": "serviduino-backend",
+  "version": "0.0.1",
+  "description": "backend para serviduino",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yesenia",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "inversify": "^6.1.4",
+    "mysql2": "^3.11.4",
+    "reflect-metadata": "^0.2.2",
+    "sequelize": "^6.37.5"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  }
+}
