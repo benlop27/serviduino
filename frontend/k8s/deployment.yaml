@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serviduino-ui
+  namespace: serviduino
+spec:
+  selector:
+    matchLabels:
+      app: serviduino-ui
+  template:
+    metadata:
+      labels:
+        app: serviduino-ui
+    spec:
+      containers:
+      - name: serviduino-ui
+        image: IMAGE_NAME_PLACEHOLDER
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: serviduino-config
+        - secretRef:
+            name: serviduino-secrets

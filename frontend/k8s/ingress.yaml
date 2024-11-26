@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: serviduino-ui-ingress
+  namespace: serviduino
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: akane.benlop27.com
+    http:
+      paths:
+      - path: /serviduino/?(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: serviduino-ui
+            port:
+              number: 80
