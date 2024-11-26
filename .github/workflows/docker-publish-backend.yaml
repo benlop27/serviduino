@@ -27,12 +27,13 @@ jobs:
         # Usar el nombre de la versión del release como etiqueta
         VERSION=${{ github.event.release.tag_name }}
         cd backend
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/serviduino-backend:$VERSION .
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/serviduino-backend:$VERSION  -t ${{ secrets.DOCKER_USERNAME }}/serviduino-backend:latest .
 
     # Paso 4: Empujar la imagen al Docker Hub
     - name: Push the Docker image
       run: |
         VERSION=${{ github.event.release.tag_name }}
+        toc
         docker push ${{ secrets.DOCKER_USERNAME }}/serviduino-backend:$VERSION
 
     # Paso 5: Limpiar las imágenes locales
