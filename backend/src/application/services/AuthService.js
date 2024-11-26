@@ -25,7 +25,7 @@ class AuthService {
   // Registrar un nuevo usuario
   async registrar(usuario, contrasena, idRol) {
     const contrasenaEncriptada = bcrypt.hashSync(contrasena, 10);
-    return await Usuario.create({ usuario, contrasena: contrasenaEncriptada, idRol });
+    return await Usuario.create({ usuario, contrasena: contrasenaEncriptada, RolId:idRol });
   }
 }
 

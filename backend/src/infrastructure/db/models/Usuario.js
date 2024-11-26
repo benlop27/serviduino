@@ -17,6 +17,10 @@ const Usuario = sequelize.define("Usuario", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  RolId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  }
 });
 
 // Relación con el modelo de Rol
