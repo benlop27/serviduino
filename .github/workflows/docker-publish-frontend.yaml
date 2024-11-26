@@ -25,7 +25,6 @@ jobs:
     - name: Build the Docker image
       run: |
         # Usar el nombre de la versión del release como etiqueta
-        VERSION=${{ github.event.release.tag_name }}
         cd frontend
         docker build -t ${{ secrets.DOCKER_USERNAME }}/serviduino-ui:latest .
 
@@ -34,9 +33,3 @@ jobs:
       run: |
         VERSION=${{ github.event.release.tag_name }}
         docker push ${{ secrets.DOCKER_USERNAME }}/serviduino-ui:latest
-
-    # Paso 5: Limpiar las imágenes locales
-    - name: Remove local images
-      run: |
-        VERSION=${{ github.event.release.tag_name }}
-        docker rmi ${{ secrets.DOCKER_USERNAME }}/serviduino-ui:$VERSION
