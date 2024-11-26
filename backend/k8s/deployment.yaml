@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: serviduino-backend
-  namespace: serviduino 
+  namespace: serviduino
 spec:
   selector:
     matchLabels:
@@ -21,3 +21,8 @@ spec:
             cpu: "200m"
         ports:
         - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: serviduino-config
+        - secretRef:
+            name: serviduino-secrets

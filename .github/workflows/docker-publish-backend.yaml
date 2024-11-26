@@ -33,7 +33,6 @@ jobs:
     - name: Push the Docker image
       run: |
         VERSION=${{ github.event.release.tag_name }}
-        toc
         docker push ${{ secrets.DOCKER_USERNAME }}/serviduino-backend:$VERSION
 
     # Paso 5: Limpiar las imágenes locales
