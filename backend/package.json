@@ -14,6 +14,7 @@
   "author": "yesenia",
   "license": "ISC",
   "dependencies": {
+    "amqplib": "^0.10.5",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
     "dotenv": "^16.4.5",
