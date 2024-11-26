@@ -34,6 +34,7 @@ jobs:
       run: |
         VERSION=${{ github.event.release.tag_name }}
         docker push ${{ secrets.DOCKER_USERNAME }}/serviduino-backend:$VERSION
+        docker push ${{ secrets.DOCKER_USERNAME }}/serviduino-backend:latest
 
     # Paso 5: Limpiar las imágenes locales
     - name: Remove local images
