@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serviduino-backend
+  namespace: serviduino 
+spec:
+  selector:
+    matchLabels:
+      app: serviduino-backend
+  template:
+    metadata:
+      labels:
+        app: serviduino-backend
+    spec:
+      containers:
+      - name: serviduino-backend
+        image: IMAGE_NAME_PLACEHOLDER
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 3000

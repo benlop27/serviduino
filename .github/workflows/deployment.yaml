@@ -1,0 +1,33 @@
+name: Desplegar a Kubernetes
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # Usa el runner local
+
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v3
+
+    - name: Extraer la versión del release
+      id: version
+      run: |
+        echo "RELEASE_VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+
+    - name: Inyectar el nombre de la imagen Docker
+      env:
+        DOCKER_IMAGE_NAME: ${{ secrets.DOCKER_IMAGE_NAME }}
+      run: |
+        echo "IMAGE_NAME=${{ env.DOCKER_IMAGE_NAME }}:${{ env.RELEASE_VERSION }}" >> $GITHUB_ENV
+        echo "Imagen Docker: ${{ env.IMAGE_NAME }}"
+
+    - name: Desplegar en Kubernetes
+      run: |
+        # Reemplazar el marcador en el manifiesto con el nombre y versión de la imagen
+        sed -i "s|IMAGE_NAME_PLACEHOLDER|${{ env.IMAGE_NAME }}|g" k8s/deployment.yaml
+        
+        # Aplicar los manifiestos a Kubernetes
+        kubectl apply -f k8s/deployment.yaml
