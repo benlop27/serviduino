@@ -4,7 +4,7 @@ on:
   release:
     types:
       - created  # Este evento se ejecuta cuando se crea un nuevo release
-
+  workflow_dispatch: 
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
