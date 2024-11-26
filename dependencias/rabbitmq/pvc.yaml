@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rabbitmq-data
+  namespace: serviduino  # Namespace actualizado
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi  # Ajusta el tamaño según tus necesidades
+  storageClassName: local-path  # Si usas local-path como StorageClass
