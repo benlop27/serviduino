@@ -26,10 +26,10 @@ router.get("/perfil", autenticarToken, verificarPermiso("ver_perfil"), (req, res
 // Ruta para iniciar sesión y obtener un token JWT
 router.post("/iniciar-sesion", async (req, res) => {
   const { usuario, contrasena } = req.body;
+ 
+  try {
   const { token } = await servicioAutenticacion.iniciarSesion(usuario, contrasena);
   res.json({ token });
-  try {
-   
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
