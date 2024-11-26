@@ -1,9 +1,9 @@
-name: Desplegar a Kubernetes
+name: Desplegar Backend a Kubernetes
 
 on:
   release:
     types: [published]
-
+  workflow_dispatch: 
 jobs:
   deploy:
     runs-on: self-hosted  # Usa el runner local
