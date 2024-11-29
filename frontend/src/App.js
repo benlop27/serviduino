@@ -30,14 +30,14 @@ const App = () => {
       }
     </Routes>)
   }
-  if(!usuario && window.location.pathname !== '/login'){
-    window.location = '/login'
+  if(!usuario && window.location.pathname !== '/serviduino/login'){
+    window.location = '/serviduino/login'
   }else{
     loginUsuario(usuario)
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/serviduino">
       {usuario ?
         (<Layout>
           <Sidebar />

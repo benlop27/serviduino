@@ -29,6 +29,7 @@ jobs:
         if kubectl get deployment serviduino-ui -n serviduino > /dev/null 2>&1; then
           echo "El Deployment ya existe. Actualizando la imagen..."
           kubectl set image deployment/serviduino-ui serviduino-ui=${IMAGE_NAME} -n serviduino
+          kubectl rollout restart deployment/serviduino-ui -n serviduino
         else
           echo "El Deployment no existe. Creándolo..." 
           sed -i "s|IMAGE_NAME_PLACEHOLDER|${IMAGE_NAME}|g" frontend/k8s/deployment.yaml
