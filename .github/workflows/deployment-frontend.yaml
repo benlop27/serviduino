@@ -17,7 +17,7 @@ jobs:
 
     - name: Inyectar el nombre de la imagen Docker
       env:
-        DOCKER_IMAGE_NAME: "serviduino-ui"
+        DOCKER_IMAGE_NAME: ${{ secrets.DOCKER_IMAGE_NAME_FRONTEND }}
       run: |
         echo "IMAGE_NAME=${{ env.DOCKER_IMAGE_NAME }}:latest" >> $GITHUB_ENV
         echo "Imagen Docker: ${{ env.IMAGE_NAME }}"
