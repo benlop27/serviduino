@@ -13,6 +13,11 @@ const Usuario = sequelize.define("Usuario", {
     unique: true,
     allowNull: false,
   },
+  nombre: {
+    type: DataTypes.STRING,
+    unique: true,
+    allowNull: false
+  },
   contrasena: {
     type: DataTypes.STRING,
     allowNull: false,

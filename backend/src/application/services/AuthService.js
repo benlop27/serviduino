@@ -14,7 +14,7 @@ class AuthService {
 
     // Generar el token JWT
     const token = jwt.sign(
-      { id: usuarioEncontrado.id, usuario: usuarioEncontrado.usuario, rol: usuarioEncontrado.Rol.nombre },
+      { id: usuarioEncontrado.id, usuario: usuarioEncontrado.usuario, rol: usuarioEncontrado.Rol.nombre, nombre: usuarioEncontrado.nombre },
       process.env.JWT_SECRETO,
       { expiresIn: "1h" }
     );
@@ -23,9 +23,9 @@ class AuthService {
   }
 
   // Registrar un nuevo usuario
-  async registrar(usuario, contrasena, idRol) {
+  async registrar(usuario, contrasena, nombre, idRol) {
     const contrasenaEncriptada = bcrypt.hashSync(contrasena, 10);
-    return await Usuario.create({ usuario, contrasena: contrasenaEncriptada, RolId:idRol });
+    return await Usuario.create({ usuario, contrasena: contrasenaEncriptada, RolId:idRol, nombre});
   }
 }
 

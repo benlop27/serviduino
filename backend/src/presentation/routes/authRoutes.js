@@ -10,8 +10,8 @@ const servicioAutenticacion = new ServicioAutenticacion();
 // Ruta para registrar un nuevo usuario
 router.post("/registrar", async (req, res) => {
   try {
-    const { usuario, contrasena, idRol } = req.body;
-    const usuarioRegistrado = await servicioAutenticacion.registrar(usuario, contrasena, idRol);
+    const { usuario, contrasena, nombre, idRol } = req.body;
+    const usuarioRegistrado = await servicioAutenticacion.registrar(usuario, contrasena, nombre, idRol);
     res.status(201).json(usuarioRegistrado);
   } catch (error) {
     res.status(400).json({ error: error.message });
