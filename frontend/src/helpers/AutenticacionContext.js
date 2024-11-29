@@ -19,7 +19,7 @@ const AutenticacionProvider = ({ children }) => {
       setUsuario(datosUsuario);
       loginUsuario(datosUsuario);
       localStorage.setItem('usuario', JSON.stringify(datosUsuario)); 
-      window.location.assign('/')
+      window.location.assign('/serviduino/')
     }
   };
 
