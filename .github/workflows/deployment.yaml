@@ -22,10 +22,15 @@ jobs:
         echo "IMAGE_NAME=${{ env.DOCKER_IMAGE_NAME }}:latest" >> $GITHUB_ENV
         echo "Imagen Docker: ${{ env.IMAGE_NAME }}"
 
-    - name: Desplegar en Kubernetes
+    - name: Crear o actualizar Deployment en Kubernetes
+      env:
+        IMAGE_NAME: ${{ env.IMAGE_NAME }}
       run: |
-        # Reemplazar el marcador en el manifiesto con el nombre y versión de la imagen
-        sed -i "s|IMAGE_NAME_PLACEHOLDER|${{ env.IMAGE_NAME }}|g" backend/k8s/deployment.yaml
-        
-        # Aplicar los manifiestos a Kubernetes
-        kubectl apply -f backend/k8s/deployment.yaml
+        if kubectl get deployment serviduino-backend -n serviduino > /dev/null 2>&1; then
+          echo "El Deployment ya existe. Actualizando la imagen..."
+          kubectl set image deployment/serviduino-backend serviduino-backend=${IMAGE_NAME} -n serviduino
+        else
+          echo "El Deployment no existe. Creándolo..." 
+          sed -i "s|IMAGE_NAME_PLACEHOLDER|${IMAGE_NAME}|g" backend/k8s/deployment.yaml
+          kubectl apply -f backend/k8s/deployment.yaml
+        fi
