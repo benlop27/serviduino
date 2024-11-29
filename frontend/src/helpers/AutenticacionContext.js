@@ -28,7 +28,7 @@ const AutenticacionProvider = ({ children }) => {
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
     logoutUsuario();
-    window.location.assign('/')
+    window.location.assign('/serviduino/')
   };
 
   return (

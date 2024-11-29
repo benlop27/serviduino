@@ -18,7 +18,7 @@ export const Sidebar = () => {
           <div style={{ paddingTop: '10px' }}>
             <img
               className="demo-logo-vertical"
-              src="logo-transparente.png"
+              src="/serviduino/logo-transparente.png"
               width='100hv' height='100vh'
               alt='Logo'
             />

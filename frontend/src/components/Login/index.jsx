@@ -208,7 +208,7 @@ export const LoginForm = () => {
         </div>
         <div className="login-logo">
           {/* Aquí puedes agregar tu logo */}
-          <img src="logo-transparente.png" alt="Logo" style={{ width: "400px", height: "400px" }} />
+          <img src="/serviduino/logo-transparente.png" alt="Logo" style={{ width: "400px", height: "400px" }} />
         </div>
       </div>
     </div>
