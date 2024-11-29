@@ -44,7 +44,7 @@ export const rutas = [
 ]
 
 export const API_CONFIG ={
-  basePath: 'http://localhost:3001',
+  basePath: 'https://akane.benlop27.com/serviduino-backend',
   usuariosEndpoint: '/api/v1/usuarios',
   clientesEndpoint:'/api/v1/cliente',
   factoresEndpoint:'/api/v1/factores',
