@@ -1,0 +1,36 @@
+name: Desplegar FrontEnd a Kubernetes
+
+on:
+  workflow_dispatch: 
+jobs:
+  deploy:
+    runs-on: self-hosted  # Usa el runner local
+
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v3
+
+    - name: Extraer la versión del release
+      id: version
+      run: |
+        echo "RELEASE_VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+
+    - name: Inyectar el nombre de la imagen Docker
+      env:
+        DOCKER_IMAGE_NAME: "serviduino-ui"
+      run: |
+        echo "IMAGE_NAME=${{ env.DOCKER_IMAGE_NAME }}:latest" >> $GITHUB_ENV
+        echo "Imagen Docker: ${{ env.IMAGE_NAME }}"
+
+    - name: Crear o actualizar Deployment en Kubernetes
+      env:
+        IMAGE_NAME: ${{ env.IMAGE_NAME }}
+      run: |
+        if kubectl get deployment serviduino-ui -n serviduino > /dev/null 2>&1; then
+          echo "El Deployment ya existe. Actualizando la imagen..."
+          kubectl set image deployment/serviduino-ui serviduino-ui=${IMAGE_NAME} -n serviduino
+        else
+          echo "El Deployment no existe. Creándolo..." 
+          sed -i "s|IMAGE_NAME_PLACEHOLDER|${IMAGE_NAME}|g" frontend/k8s/deployment.yaml
+          kubectl apply -f frontend/k8s/deployment.yaml
+        fi
