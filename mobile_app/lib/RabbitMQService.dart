@@ -1,5 +1,4 @@
 import 'package:dart_amqp/dart_amqp.dart';
-import 'ArduinoService.dart';
 
 class RabbitMQService {
   late Client _client;
@@ -37,6 +36,16 @@ class RabbitMQService {
     });
   }
 
+
+Future<void> enviarMensaje( mensaje) async {
+
+ 
+
+  try {
+    _queue.publish(mensaje);
+  } catch (error) {
+  }
+}
     Future<void> close() async {
 
     await _channel.close();  // Cerrar el canal

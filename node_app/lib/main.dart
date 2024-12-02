@@ -98,6 +98,7 @@ class _BluetoothAndRabbitMQPageState extends State<BluetoothAndRabbitMQPage> {
     super.dispose();
   }
 
+  // Procesar comandos recibidos desde RabbitMQ
   void _procesarComando(String command) {
     print("Comando recibido: $command");
 
@@ -128,6 +129,15 @@ class _BluetoothAndRabbitMQPageState extends State<BluetoothAndRabbitMQPage> {
     } else {
       print("Comando mal formateado: $command");
     }
+  }
+
+  // Función para manejar el cambio de estado del relé
+  void _toggleRelay(int index) {
+    setState(() {
+      _relayStates[index] = !_relayStates[index];
+    });
+    String command = _relayStates[index] ? "ON$index" : "OFF$index";
+    _arduinoService.sendCommand(command); // Enviar el comando al Arduino
   }
 
   @override
@@ -162,19 +172,22 @@ class _BluetoothAndRabbitMQPageState extends State<BluetoothAndRabbitMQPage> {
               itemBuilder: (BuildContext context, int index) {
                 String label = index < 3 ? "Luz ${index+1}" : "Agua";
                 String state = _relayStates[index] ? "ON" : "OFF";
-                return Container(
-                  decoration: BoxDecoration(
-                    color: _relayStates[index] ? Colors.green : Colors.red,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(label, style: TextStyle(color: Colors.white, fontSize: 18)),
-                        SizedBox(height: 10),
-                        Text(state, style: TextStyle(color: Colors.white, fontSize: 24)),
-                      ],
+                return GestureDetector(
+                  onTap: () => _toggleRelay(index), // Cambiar estado al hacer tap
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: _relayStates[index] ? Colors.green : Colors.red,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(label, style: TextStyle(color: Colors.white, fontSize: 18)),
+                          SizedBox(height: 10),
+                          Text(state, style: TextStyle(color: Colors.white, fontSize: 24)),
+                        ],
+                      ),
                     ),
                   ),
                 );
